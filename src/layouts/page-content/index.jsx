@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Toast} from 'antd-mobile';
 import Footer from '../footer';
 import {connect} from 'src/models/index';
+import {Helmet} from 'react-helmet';
 import './style.less';
 
 /**
@@ -11,7 +12,11 @@ import './style.less';
  * 1. 自动判断是否含有FixBottom，并为之腾出空间
  * 1. 是否含有公共footer
  */
-@connect(state => ({pageLoading: state.page.loading, pageLoadingTip: state.page.loadingTip}))
+@connect(state => ({
+    title: state.page.title,
+    pageLoading: state.page.loading,
+    pageLoadingTip: state.page.loadingTip,
+}))
 export default class PageContent extends Component {
     static propTypes = {
         loading: PropTypes.bool,
@@ -38,6 +43,7 @@ export default class PageContent extends Component {
             children,
             action,
             className,
+            title,
             ...others
         } = this.props;
 
@@ -60,8 +66,12 @@ export default class PageContent extends Component {
 
         if (!isLoading) Toast.hide();
 
+        const titleText = title?.text || title;
+        const titleIsString = typeof titleText === 'string';
+
         return (
             <div style={rootStyle} styleName="page-content-root">
+                <Helmet title={titleIsString ? titleText : ''}/>
                 <div
                     className={`${className} page-content`}
                     styleName="page-content"

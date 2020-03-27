@@ -6,7 +6,7 @@ import './style.less';
 
 @config({
     path: '/',
-    title: {text: '首页', icon: 'home'},
+    title: '首页',
 })
 export default class Home extends Component {
 
@@ -25,7 +25,7 @@ export default class Home extends Component {
         const {loading} = this.state;
         return (
             <PageContent loading={loading}>
-                <Button onClick={() => this.props.history.push('/about')}>关于</Button>
+                <Button type="primary" onClick={() => this.props.history.push('/about')}>关于</Button>
             </PageContent>
         );
     }

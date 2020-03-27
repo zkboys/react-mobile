@@ -1,6 +1,5 @@
 import {Component} from 'react';
 import {Toast} from 'antd-mobile';
-import 'nprogress/nprogress.css';
 
 export default class Index extends Component {
     constructor(...props) {
